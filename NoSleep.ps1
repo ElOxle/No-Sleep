@@ -1,9 +1,10 @@
-﻿# ---------------------------------------
+# ---------------------------------------
 # NoSleep.ps1
 # Daniel Oxley
 # v1.0 - Initial Version
 # v1.1 - Updates for slacking off brother
-# ---------------------------------------
+# v1.2 - Fixed munged character on minimise button
+# ------------------------------------------------
 
 $t = '[DllImport("user32.dll")] public static extern bool ShowWindow(int handle, int state);'
 add-type -name win -member $t -namespace native
@@ -52,7 +53,7 @@ $btnNoSleep_OnClick=
 $handler_timer1_Tick= 
 {
     $myshell = New-Object -com "Wscript.Shell"
-    $myshell.SendKeys(“{NUMLOCK}{NUMLOCK}”)
+    $myshell.SendKeys("{NUMLOCK}{NUMLOCK}")
 
     $lblMsg.Text = "Tick: $(Get-Date -Format "HH:mm.ss")"
 }
@@ -100,16 +101,16 @@ $frmMain.TopMost = $True
 $btnMin.DataBindings.DefaultDataSourceUpdateMode = 0
 
 $System_Drawing_Point = New-Object System.Drawing.Point
-$System_Drawing_Point.X = 148
+$System_Drawing_Point.X = 142
 $System_Drawing_Point.Y = 26
 $btnMin.Location = $System_Drawing_Point
 $btnMin.Name = "btnMin"
 $System_Drawing_Size = New-Object System.Drawing.Size
 $System_Drawing_Size.Height = 23
-$System_Drawing_Size.Width = 24
+$System_Drawing_Size.Width = 30
 $btnMin.Size = $System_Drawing_Size
 $btnMin.TabIndex = 4
-$btnMin.Text = "▼"
+$btnMin.Text = "Min"
 $btnMin.UseVisualStyleBackColor = $True
 $btnMin.add_Click($btnMin_OnClick)
 
